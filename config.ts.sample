@@ -1,0 +1,17 @@
+/**
+ * Seed of a Logion user interacting with the platform.
+ * */
+export const USER_SEED = "<your seed phrase here>";
+/**
+ * Public address of the Logion Legal Officer linked to the Logion user
+ * by a closed Identity LOC.
+ */
+export const LEGAL_OFFICER_1 = "<an SS58 address of the LLO e.g. 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY>";
+/**
+ * URL of the Logion directory (depends on the environment)
+ */
+export const LOGION_DIRECTORY = "<e.g. for test environment, use https://test-directory.logion.network>";
+/**
+ * URL of the Logion blockchain (depends on the environment)
+ */
+export const LOGION_RPC = "<e.g. for test environment, wss://test-rpc01.logion.network>";
