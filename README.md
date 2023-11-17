@@ -15,7 +15,7 @@ The purpose of this project is to demonstrate the integration of a React Native 
 
 ## Step 0: configure your access to Logion
 
-If not yet done, copy [`config.ts.sample`](./config.ts.sample) to `config.ts` and change the variables to match your setup.
+If not done yet, copy [`config.ts.sample`](./config.ts.sample) to `config.ts` and change the variables to match your setup.
 
 **Never commit `config.ts` (it is gitignored) as it contains the seed of an account.**
 
