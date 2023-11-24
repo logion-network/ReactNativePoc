@@ -6,7 +6,7 @@ export const USER_SEED = "<your seed phrase here>";
  * Public address of the Logion Legal Officer linked to the Logion user
  * by a closed Identity LOC.
  */
-export const LEGAL_OFFICER_1 = "<an SS58 address of the LLO e.g. 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY>";
+export const LEGAL_OFFICER = "<an SS58 address of the LLO e.g. 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY>";
 /**
  * URL of the Logion directory (depends on the environment)
  */
