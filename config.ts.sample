@@ -8,10 +8,6 @@ export const USER_SEED = "<your seed phrase here>";
  */
 export const LEGAL_OFFICER = "<an SS58 address of the LLO e.g. 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY>";
 /**
- * URL of the Logion directory (depends on the environment)
+ * Environment, one of DEV | TEST | MVP
  */
-export const LOGION_DIRECTORY = "<e.g. for test environment, use https://test-directory.logion.network>";
-/**
- * URL of the Logion blockchain (depends on the environment)
- */
-export const LOGION_RPC = "<e.g. for test environment, wss://test-rpc01.logion.network>";
+export const LOGION_ENV = "DEV";
