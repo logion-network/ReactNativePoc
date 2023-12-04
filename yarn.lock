@@ -1320,18 +1320,18 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@logion/client-react-native-fs@^0.2.0-2":
-  version "0.2.0-2"
-  resolved "https://registry.yarnpkg.com/@logion/client-react-native-fs/-/client-react-native-fs-0.2.0-2.tgz#05f098517d8583e4c4aa01d910580d0871e7b433"
-  integrity sha512-k+H6/t/5LAK09ImeExMiee6Qo2V+ppqiLkmr2YzaybjkkoAVFzZnMSYu4tJoVAnDff/nbHYNFx9XhVT/MamqvA==
+"@logion/client-react-native-fs@^0.2.0-3":
+  version "0.2.0-3"
+  resolved "https://registry.yarnpkg.com/@logion/client-react-native-fs/-/client-react-native-fs-0.2.0-3.tgz#9fdd3b1ac44dc2a6b0d9652801297e2a6eaef1fb"
+  integrity sha512-2vHoFUN1v1tCyx9UkQGO40jII6RzIHBSTSt6zGzsIUdzRdi/TIZnvTDFW8/9/OPOMskLb0GgpLdaz7JdcBGP7g==
   dependencies:
-    "@logion/client" "^0.36.0-3"
+    "@logion/client" "^0.36.0-5"
     react-native-fs "^2.20.0"
 
-"@logion/client@^0.36.0-3":
-  version "0.36.0-4"
-  resolved "https://registry.yarnpkg.com/@logion/client/-/client-0.36.0-4.tgz#eb42ca4f18bf8a0b69ef9eec8f5bcac14f207e45"
-  integrity sha512-hopA5pYw+wYbIM0lo9XtrgdHsSk2i5fOCRGXf7hQ6b5s/sRi5HAKDiPY+kMRdc1oLBjueJNi1uF5PeMe1QKc0g==
+"@logion/client@^0.36.0-5":
+  version "0.36.0-5"
+  resolved "https://registry.yarnpkg.com/@logion/client/-/client-0.36.0-5.tgz#d7ff6b480e53ba2eaec6df180984f893074cc3ad"
+  integrity sha512-rm1cbWbM6pQ9+MWI+6hPzhGXSw6ONotFWWIkubbB8yWBLDBbl+ZoaNptG3kL30zOjz7MHTk5BNnY+6+peMCLIQ==
   dependencies:
     "@logion/node-api" "^0.26.0"
     axios "^0.27.2"

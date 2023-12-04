@@ -11,17 +11,15 @@ import {
     View,
 } from 'react-native';
 import {
-    LogionClient,
     KeyringSigner,
     ClosedLoc,
     DraftRequest,
     HashOrContent,
     MimeType,
-    validEnvironmentOrThrow,
 } from '@logion/client';
 import { ValidAccountId } from "@logion/node-api";
 import { Keyring } from "@polkadot/api";
-import { ReactNativeFsFile, createLogionClientConfig } from '@logion/client-react-native-fs';
+import { LogionClient, ReactNativeFsFile } from '@logion/client-react-native-fs';
 import { Buffer } from 'buffer';
 import RNFS from "react-native-fs";
 
@@ -48,9 +46,7 @@ export default function App() {
     const [draftCollectionLoc, setDraftCollectionLoc] = useState<DraftRequest | null>();
     const connect = useCallback(async () => {
         if (!client) {
-            const env = validEnvironmentOrThrow(LOGION_ENV);
-            const config = createLogionClientConfig(env);
-            let createdClient = await LogionClient.create(config);
+            let createdClient = await LogionClient.fromEnv(LOGION_ENV);
             const keyring = new Keyring({ type: "sr25519" });
             const keypair = keyring.addFromUri(USER_SEED);
             const keyringSigner = new KeyringSigner(keyring);

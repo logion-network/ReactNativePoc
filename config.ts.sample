@@ -10,4 +10,4 @@ export const LEGAL_OFFICER = "<an SS58 address of the LLO e.g. 5GrwvaEF5zXb26Fz9
 /**
  * Environment, one of DEV | TEST | MVP
  */
-export const LOGION_ENV = "DEV";
+export const LOGION_ENV = Environment.DEV;
