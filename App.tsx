@@ -10,10 +10,16 @@ import {
     useColorScheme,
     View,
 } from 'react-native';
-import { LogionClient, KeyringSigner, ClosedLoc, DraftRequest, HashOrContent, MimeType } from '@logion/client';
+import {
+    KeyringSigner,
+    ClosedLoc,
+    DraftRequest,
+    HashOrContent,
+    MimeType,
+} from '@logion/client';
 import { ValidAccountId } from "@logion/node-api";
 import { Keyring } from "@polkadot/api";
-import { ReactNativeFileUploader, ReactNativeFsFile } from '@logion/client-react-native-fs';
+import { LogionClient, ReactNativeFsFile } from '@logion/client-react-native-fs';
 import { Buffer } from 'buffer';
 import RNFS from "react-native-fs";
 
@@ -22,7 +28,7 @@ import {
     Header,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { LOGION_DIRECTORY, LOGION_RPC, USER_SEED, LEGAL_OFFICER } from './config';
+import { LOGION_ENV, USER_SEED, LEGAL_OFFICER } from './config';
 
 global.Buffer = Buffer;
 
@@ -40,11 +46,7 @@ export default function App() {
     const [draftCollectionLoc, setDraftCollectionLoc] = useState<DraftRequest | null>();
     const connect = useCallback(async () => {
         if (!client) {
-            let createdClient = await LogionClient.create({
-                directoryEndpoint: LOGION_DIRECTORY,
-                rpcEndpoints: [ LOGION_RPC ],
-                buildFileUploader: () => new ReactNativeFileUploader(),
-            });
+            let createdClient = await LogionClient.fromEnv(LOGION_ENV);
             const keyring = new Keyring({ type: "sr25519" });
             const keypair = keyring.addFromUri(USER_SEED);
             const keyringSigner = new KeyringSigner(keyring);

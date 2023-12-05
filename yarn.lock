@@ -1320,28 +1320,28 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@logion/client-react-native-fs@^0.1.0-11":
-  version "0.1.0-11"
-  resolved "https://registry.yarnpkg.com/@logion/client-react-native-fs/-/client-react-native-fs-0.1.0-11.tgz#4dd02540835cd489bc8daa48225fcf2c94d32ffe"
-  integrity sha512-1runt1AGRPp+B66S96ugleEcM2pGce/zaCiWl2K55cFPiHAOziKue7H3KpqxnOakmXnjjzQk6rh7WV9k+M3ccQ==
+"@logion/client-react-native-fs@^0.2.0-3":
+  version "0.2.0-3"
+  resolved "https://registry.yarnpkg.com/@logion/client-react-native-fs/-/client-react-native-fs-0.2.0-3.tgz#9fdd3b1ac44dc2a6b0d9652801297e2a6eaef1fb"
+  integrity sha512-2vHoFUN1v1tCyx9UkQGO40jII6RzIHBSTSt6zGzsIUdzRdi/TIZnvTDFW8/9/OPOMskLb0GgpLdaz7JdcBGP7g==
   dependencies:
-    "@logion/client" "^0.35.0-1"
+    "@logion/client" "^0.36.0-5"
     react-native-fs "^2.20.0"
 
-"@logion/client@^0.35.0-1":
-  version "0.35.0-1"
-  resolved "https://registry.yarnpkg.com/@logion/client/-/client-0.35.0-1.tgz#5745915b6383f4368d8512f0b1c12ed60c85e068"
-  integrity sha512-Ij73UZ0vPsGgnThhpDtmSzc3qq2E0BtBeyC4rMpuK/hdyD0FqqzUGu6ckr4SD5oxc4HC4Q+QLTJ3YgGq4KG5kA==
+"@logion/client@^0.36.0-5":
+  version "0.36.0-5"
+  resolved "https://registry.yarnpkg.com/@logion/client/-/client-0.36.0-5.tgz#d7ff6b480e53ba2eaec6df180984f893074cc3ad"
+  integrity sha512-rm1cbWbM6pQ9+MWI+6hPzhGXSw6ONotFWWIkubbB8yWBLDBbl+ZoaNptG3kL30zOjz7MHTk5BNnY+6+peMCLIQ==
   dependencies:
-    "@logion/node-api" "^0.25.0"
+    "@logion/node-api" "^0.26.0"
     axios "^0.27.2"
     luxon "^3.0.1"
     mime-db "^1.52.0"
 
-"@logion/node-api@^0.25.0":
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/@logion/node-api/-/node-api-0.25.0.tgz#f94c0aa7492f962e860cbe81ff250cce29a37499"
-  integrity sha512-kDw95MORE576qpTPMzZfRFWYnG73hZKh4hmWdYKoG3yIfSqh1rvTLZVzP5KyFUvtyZPgncoZJzPaMV/4IilMww==
+"@logion/node-api@^0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@logion/node-api/-/node-api-0.26.0.tgz#0157dd8cfbec13574859fa02e452602329c6153e"
+  integrity sha512-2NbBrjzL2MU68TAxH6kMMQCmiqG+c3SPeAT0YzAkn8kQnQH3vmANYewF1BDM7yQRDJDclEvMuD4MxM4fvQnYig==
   dependencies:
     "@polkadot/api" "^10.10.1"
     "@polkadot/util" "^12.5.1"

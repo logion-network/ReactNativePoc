@@ -1,0 +1,7 @@
+{
+  "plugins": [
+    "@babel/plugin-transform-class-static-block",
+    "@babel/plugin-transform-class-properties"
+  ],
+  "presets": ["module:metro-react-native-babel-preset"]
+}
