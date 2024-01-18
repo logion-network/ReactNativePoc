@@ -1,34 +1,24 @@
-import React, { useCallback, useState } from 'react';
 import type { PropsWithChildren } from 'react';
-import {
-    Button,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View,
-} from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { Button, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View, } from 'react-native';
 import {
     KeyringSigner,
     ClosedLoc,
     DraftRequest,
     HashOrContent,
     MimeType,
+    LogionClient,
+    InvitedContributorLoc,
 } from '@logion/client';
-import { ValidAccountId } from "@logion/node-api";
+import { ValidAccountId, UUID, Hash } from "@logion/node-api";
 import { Keyring } from "@polkadot/api";
-import { LogionClient, ReactNativeFsFile } from '@logion/client-react-native-fs';
+import { newLogionClient, ReactNativeFsFile } from '@logion/client-react-native-fs';
 import { Buffer } from 'buffer';
 import RNFS from "react-native-fs";
 
-import {
-    Colors,
-    Header,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors, Header, } from 'react-native/Libraries/NewAppScreen';
 
-import { LOGION_ENV, USER_SEED, LEGAL_OFFICER } from './config';
+import { LOGION_ENV, USER_SEED, LEGAL_OFFICER, LOGION_CLIENT_CONFIG, COLLECTION_LOC_ID } from './config';
 
 global.Buffer = Buffer;
 
@@ -44,9 +34,11 @@ export default function App() {
     const [accountId, setAccountId] = useState<ValidAccountId>();
     const [identityLoc, setIdentityLoc] = useState<ClosedLoc | null>();
     const [draftCollectionLoc, setDraftCollectionLoc] = useState<DraftRequest | null>();
+    const [invitedContributorLoc, setInvitedContributorLoc] = useState<InvitedContributorLoc | null>();
+    const [numberOfTokensRecords, setNumberOfTokensRecords] = useState<number>(0);
     const connect = useCallback(async () => {
         if (!client) {
-            let createdClient = await LogionClient.fromEnv(LOGION_ENV);
+            let createdClient = await getLogionClient();
             const keyring = new Keyring({ type: "sr25519" });
             const keypair = keyring.addFromUri(USER_SEED);
             const keyringSigner = new KeyringSigner(keyring);
@@ -65,28 +57,79 @@ export default function App() {
                 setIdentityLoc(null);
             }
 
-            const draftCollectionLoc = locsState.draftRequests["Collection"][0];
-            if(draftCollectionLoc) {
-                setDraftCollectionLoc(draftCollectionLoc as DraftRequest);
-            } else {
-                setDraftCollectionLoc(null);
-            }
+            // const draftCollectionLoc = locsState.draftRequests["Collection"][0];
+            // if(draftCollectionLoc) {
+            //     setDraftCollectionLoc(draftCollectionLoc as DraftRequest);
+            // } else {
+            //     setDraftCollectionLoc(null);
+            // }
+            //
+            // let locId = UUID.fromAnyString(COLLECTION_LOC_ID);
+            // if (locId) {
+            //     const closedCollectionLoc = await createdClient.invitedContributor.findLocById({ locId })
+            //     if (closedCollectionLoc) {
+            //         setNumberOfTokensRecords(await getNumberOfTokensRecords(createdClient, locId));
+            //         setInvitedContributorLoc(closedCollectionLoc);
+            //     } else {
+            //         setInvitedContributorLoc(null);
+            //     }
+            // } else {
+            //     setInvitedContributorLoc(null);
+            // }
         }
     }, [ client ]);
+
+    const getNumberOfTokensRecords = useCallback(async (client: LogionClient, locId: UUID) => {
+        return (await client.public.getTokensRecords({
+            locId,
+            jwtToken: client.tokens.get(),
+        }))?.length || 0
+    }, []);
+
+    const writeFileAndGetContent = useCallback(async (idx: number) => {
+        const fileName = `file${idx}.txt`;
+        const path = `${ RNFS.TemporaryDirectoryPath }/${ fileName }`;
+        await RNFS.writeFile(path, `test${idx}`);
+        return HashOrContent.fromContent(new ReactNativeFsFile(path, fileName, MimeType.from("text/plain")));
+    }, []);
+
+    const getLogionClient = useCallback(async () => {
+        if (LOGION_CLIENT_CONFIG) {
+            return await LogionClient.create(LOGION_CLIENT_CONFIG);
+        } else {
+            return await newLogionClient(LOGION_ENV);
+        }
+    }, []);
 
     const addFile = useCallback(async () => {
         if(draftCollectionLoc) {
             const numberOfFiles = draftCollectionLoc.data().files.length;
-            const fileName = `file${numberOfFiles}.txt`;
-            const path = `${ RNFS.TemporaryDirectoryPath }/${ fileName }`;
-            await RNFS.writeFile(path, `test${numberOfFiles}`);
+            const file = await writeFileAndGetContent(numberOfFiles);
             let state = await draftCollectionLoc.addFile({
-                file: HashOrContent.fromContent(new ReactNativeFsFile(path, fileName, MimeType.from("text/plain"))),
+                file,
                 nature: `Test ${numberOfFiles}`,
             }) as DraftRequest;
             setDraftCollectionLoc(state);
         }
     }, [ signer, draftCollectionLoc ]);
+
+    const addTokensRecord = useCallback(async () => {
+        if (client && signer && invitedContributorLoc) {
+            const file = await writeFileAndGetContent(numberOfTokensRecords);
+            const recordId = Hash.of(`Record #${ numberOfTokensRecords }`);
+            const description = `This is the Tokens Record #${ numberOfTokensRecords }`;
+            let state = await invitedContributorLoc.addTokensRecord({
+                signer,
+                payload: {
+                    recordId,
+                    description,
+                    files: [ file ],
+                }
+            });
+            setNumberOfTokensRecords(await getNumberOfTokensRecords(client, invitedContributorLoc.data.id));
+            setInvitedContributorLoc(state);
+        }
+    }, [ signer, invitedContributorLoc, client, numberOfTokensRecords ]);
 
     return (
         <SafeAreaView style={backgroundStyle}>
@@ -131,6 +174,17 @@ export default function App() {
                             <Button
                                 title="Add file"
                                 onPress={ addFile }
+                            />
+                        </Section>
+                    }
+                    {
+                        invitedContributorLoc !== undefined &&
+                        <Section title="Invited Contributor Collecion LOC">
+                            ID: {invitedContributorLoc?.data.id.toDecimalString() || "None"}{"\n"}
+                            Records: {numberOfTokensRecords.toString()}{"\n"}
+                            <Button
+                                title="Add tokens record"
+                                onPress={ addTokensRecord }
                             />
                         </Section>
                     }
