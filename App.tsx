@@ -57,25 +57,25 @@ export default function App() {
                 setIdentityLoc(null);
             }
 
-            // const draftCollectionLoc = locsState.draftRequests["Collection"][0];
-            // if(draftCollectionLoc) {
-            //     setDraftCollectionLoc(draftCollectionLoc as DraftRequest);
-            // } else {
-            //     setDraftCollectionLoc(null);
-            // }
-            //
-            // let locId = UUID.fromAnyString(COLLECTION_LOC_ID);
-            // if (locId) {
-            //     const closedCollectionLoc = await createdClient.invitedContributor.findLocById({ locId })
-            //     if (closedCollectionLoc) {
-            //         setNumberOfTokensRecords(await getNumberOfTokensRecords(createdClient, locId));
-            //         setInvitedContributorLoc(closedCollectionLoc);
-            //     } else {
-            //         setInvitedContributorLoc(null);
-            //     }
-            // } else {
-            //     setInvitedContributorLoc(null);
-            // }
+            const draftCollectionLoc = locsState.draftRequests["Collection"][0];
+            if(draftCollectionLoc) {
+                setDraftCollectionLoc(draftCollectionLoc as DraftRequest);
+            } else {
+                setDraftCollectionLoc(null);
+            }
+            
+            let locId = UUID.fromAnyString(COLLECTION_LOC_ID);
+            if (locId) {
+                const closedCollectionLoc = await authenticatedClient.invitedContributor.findLocById({ locId })
+                if (closedCollectionLoc) {
+                    setNumberOfTokensRecords(await getNumberOfTokensRecords(authenticatedClient, locId));
+                    setInvitedContributorLoc(closedCollectionLoc);
+                } else {
+                    setInvitedContributorLoc(null);
+                }
+            } else {
+                setInvitedContributorLoc(null);
+            }
         }
     }, [ client ]);
 

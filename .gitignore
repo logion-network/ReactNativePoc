@@ -70,3 +70,6 @@ config.ts
 
 # VSCode
 .vscode
+
+# Build artifacts
+index.android.bundle
