@@ -9,7 +9,8 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "@logion/client-react-native-fs": "^0.2.2-1",
+    "@logion/client": "^0.43.0",
+    "@logion/client-react-native-fs": "^0.2.5",
     "buffer": "^6.0.3",
     "react": "18.2.0",
     "react-native": "0.72.6"
