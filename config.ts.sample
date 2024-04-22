@@ -1,4 +1,5 @@
 import { Environment, LogionClientConfig } from "@logion/client";
+import { ValidAccountId } from "@logion/node-api";
 
 /**
  * Seed of a Logion user interacting with the platform.
@@ -8,7 +9,7 @@ export const USER_SEED = "<your seed phrase here>";
  * Public address of the Logion Legal Officer linked to the Logion user
  * by a closed Identity LOC.
  */
-export const LEGAL_OFFICER = "<an SS58 address of the LLO e.g. 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY>";
+export const LEGAL_OFFICER = ValidAccountId.polkadot("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY");
 /**
  * Environment, one of DEV | TEST | MVP
  */
